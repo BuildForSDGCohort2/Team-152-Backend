@@ -1,0 +1,38 @@
+{
+  "name": "sdg",
+  "version": "0.0.1",
+  "private": true,
+  "description": "api for sdgCohort2 tutor hiring backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "test"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "sequelize": "^6.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BuildForSDGCohort2/Team-152-Backend.git"
+  },
+  "keywords": [
+    "tutors",
+    "skills",
+    "instructors"
+  ],
+  "author": "Ekenskios Leonard Ugbanawaji",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BuildForSDGCohort2/Team-152-Backend/issues"
+  },
+  "homepage": "https://github.com/BuildForSDGCohort2/Team-152-Backend#readme",
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
+  }
+}
