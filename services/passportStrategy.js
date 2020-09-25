@@ -3,13 +3,12 @@
 const { Strategy:JWTStrategy, ExtractJwt } = require('passport-jwt')
 
 const models = require('../models')
-const {keys} = require('../config/config.json');
 
 // Hooks the JWT Strategy.
 function hookJWTStrategy(passport) {
     var options = {};
 
-    options.secretOrKey = keys.secret;
+    options.secretOrKey = process.env.APP_KEY;
     options.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
     options.ignoreExpiration = false;
 
