@@ -5,6 +5,7 @@
   "description": "api for sdgCohort2 tutor hiring backend",
   "main": "app.js",
   "scripts": {
+    "prestart": "cp .env.example .env",
     "start": "node ./bin/www",
     "test": "test"
   },
