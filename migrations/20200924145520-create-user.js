@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       location: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       jobRole: {
         type: Sequelize.STRING
@@ -31,6 +31,9 @@ module.exports = {
       },
       technologyYouCanTeach: {
         type: Sequelize.INTEGER
+      },
+      password: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

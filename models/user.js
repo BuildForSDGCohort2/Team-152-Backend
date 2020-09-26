@@ -1,4 +1,5 @@
 'use strict';
+const bcrypt = require('bcrypt')
 const {
   Model
 } = require('sequelize');
@@ -11,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.User.hasMany(models.TechnologyYouCanTeach)
+      models.User.hasMany(models.Skill)
     }
   };
   User.init({
@@ -18,13 +21,34 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING,
     email: DataTypes.STRING,
     gender: DataTypes.STRING,
-    location: DataTypes.INTEGER,
+    location: DataTypes.STRING,
     jobRole: DataTypes.STRING,
     skill: DataTypes.INTEGER,
-    technologyYouCanTeach: DataTypes.INTEGER
+    technologyYouCanTeach: DataTypes.INTEGER,
+    password: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',
+    paranoid: true, instanceMethods: {
+      comparePasswords: (password, prevPassword,callback) => {
+        bcrypt.compare(password, prevPassword, (error, isMatch) => {
+            if(error) {
+                return callback(error);
+            }
+    
+            return callback(null, isMatch);
+        });
+    }
+  },
+  hooks: {
+      beforeValidate: (user) => {
+        if(user.changed('password')) {
+            return bcrypt.hash(user.password, 10).then(function(password) {
+                user.password = password;
+            });
+        }
+    }
+  }
   });
   return User;
 };
