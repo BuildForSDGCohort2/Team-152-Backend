@@ -28,4 +28,129 @@ This will create all related tables if not exist and start the application.
 
 ## Available Routes
 
+#### **POST** `/api/signup`
+* Used for signing up a user. Accepts:
+```
+{
+	"name": "Ekenekiso Leonard",
+  "phone": "08066607729",
+  "email": "gadfesfeeu@gmail.com",
+  "gender": "male",
+  "location": "Port Harcourt",
+  "jobRole": "Full Stack Developer",
+  "skill": [
+		{"TechStackId": "1"},
+		{"TechStackId": "2"},
+		{"TechStackId": "3"},
+		{"TechStackId": "4"},
+		{"TechStackId": "5"}
+	],
+  "technologyYouCanTeach": [
+		{"TechStackId": "1"},
+		{"TechStackId": "2"},
+		{"TechStackId": "3"},
+		{"TechStackId": "4"},
+		{"TechStackId": "5"}
+	],
+  "password": "syndicate",
+	"passwordConfirmation": "syndicate"
+}
+```
+and returns:
+```
+{
+  "success": true,
+  "message": "Account created",
+  "code": 201,
+  "data": {
+    "id": 42,
+    "name": "Ekenekiso Leonard",
+    "phone": "08066607729",
+    "email": "gadfesfeeu@gmail.com",
+    "gender": "male",
+    "location": "Port Harcourt",
+    "jobRole": "Full Stack Developer",
+    "password": "",
+    "updatedAt": "2020-09-27T22:45:53.362Z",
+    "createdAt": "2020-09-27T22:45:53.362Z",
+    "skill": [
+      {
+        "id": 201,
+        "TechStackId": "1",
+        "UserId": 42,
+        "createdAt": "2020-09-27T22:45:53.451Z",
+        "updatedAt": "2020-09-27T22:45:53.451Z"
+      },
+      {
+        "id": 202,
+        "TechStackId": "2",
+        "UserId": 42,
+        "createdAt": "2020-09-27T22:45:53.451Z",
+        "updatedAt": "2020-09-27T22:45:53.451Z"
+      },
+      {
+        "id": 203,
+        "TechStackId": "3",
+        "UserId": 42,
+        "createdAt": "2020-09-27T22:45:53.451Z",
+        "updatedAt": "2020-09-27T22:45:53.451Z"
+      },
+      {
+        "id": 204,
+        "TechStackId": "4",
+        "UserId": 42,
+        "createdAt": "2020-09-27T22:45:53.451Z",
+        "updatedAt": "2020-09-27T22:45:53.451Z"
+      },
+      {
+        "id": 205,
+        "TechStackId": "5",
+        "UserId": 42,
+        "createdAt": "2020-09-27T22:45:53.451Z",
+        "updatedAt": "2020-09-27T22:45:53.451Z"
+      }
+    ],
+    "technologyYouCanTeach": [
+      {
+        "id": 196,
+        "TechStackId": "1",
+        "UserId": 42,
+        "createdAt": "2020-09-27T22:45:53.462Z",
+        "updatedAt": "2020-09-27T22:45:53.462Z"
+      },
+      {
+        "id": 197,
+        "TechStackId": "2",
+        "UserId": 42,
+        "createdAt": "2020-09-27T22:45:53.462Z",
+        "updatedAt": "2020-09-27T22:45:53.462Z"
+      },
+      {
+        "id": 198,
+        "TechStackId": "3",
+        "UserId": 42,
+        "createdAt": "2020-09-27T22:45:53.462Z",
+        "updatedAt": "2020-09-27T22:45:53.462Z"
+      },
+      {
+        "id": 199,
+        "TechStackId": "4",
+        "UserId": 42,
+        "createdAt": "2020-09-27T22:45:53.462Z",
+        "updatedAt": "2020-09-27T22:45:53.462Z"
+      },
+      {
+        "id": 200,
+        "TechStackId": "5",
+        "UserId": 42,
+        "createdAt": "2020-09-27T22:45:53.462Z",
+        "updatedAt": "2020-09-27T22:45:53.462Z"
+      }
+    ]
+  },
+  "error": {}
+}
+```
+ A json response payload. the error property will be populated if there's an error during execution of the create process.
+
 #### **POST** `/api/login`
