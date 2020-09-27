@@ -5,9 +5,12 @@
   "description": "api for sdgCohort2 tutor hiring backend",
   "main": "app.js",
   "scripts": {
+    "unseed": "npx sequelize-cli db:seed:undo",
+    "checkseed": "npx sequelize-cli db:seed:undo && npx sequelize-cli db:seed:all",
+    "seed": "npx sequelize-cli db:seed:all",
     "prestart": "cp .env.example .env",
     "start": "node ./bin/www",
-    
+    "prestart:dev": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:undo && npx sequelize-cli db:seed:all",
     "start:dev": "node ./bin/www",
     "test": "test"
   },

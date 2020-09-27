@@ -14,15 +14,16 @@ module.exports = (sequelize, DataTypes) => {
       models.Skill.belongsTo(models.User, {
         onDelete: "CASCADE",
         foreignKey: {
-          allowNull: false}
+          allowNull: true}
         })
-
-
-      
+        models.Skill.belongsTo(models.TechStack, {
+          onDelete: "CASCADE",
+          foreignKey: {
+            allowNull: true}
+          })
     }
   };
   Skill.init({
-    name: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Skill',

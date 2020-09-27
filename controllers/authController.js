@@ -5,35 +5,58 @@ const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken');
 const models = require('../models');
 const url = require('url')
+const userService = require('../services/userService')
 
 // The authentication controller.
 const AuthController = {};
 
 // Register a user.
-AuthController.signUp = (req, res) => {
+AuthController.signUp = async (req, res) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
         return res.status(422).json({ success: false, message: 'failed validation',
-        code: 422, properties:{phone: req.body.phone || null, email: req.body.email || null, phone: req.body.firstName || null, lastName: req.body.lastName || null,
-            password: req.body.password || null}, error: result.array()  });
+        code: 422, error: result.array()  });
 
     }
-        models.User.create({
-            email: req.body.email,
-            phone: req.body.phone,
-            password: req.body.password,
-            lastName: req.body.lastName,
-            firstName: req.body.lastName,
-            role: ''
-        }).then((user) =>{
-            return res.status(201).json({ success: true, message: 'Account created',
-                    code: 201, properties: { phone: req.body.phone || null, email: req.body.email || null, phone: req.body.firstName || null, lastName: req.body.lastName || null,
-                    password: req.body.password || null}, data: user  });
-        }).catch((error) => {
-            return res.status(520).json({ success: false, message: 'unknown error',
-        code: 520, properties:{phone: req.body.phone || null, email: req.body.email || null, phone: req.body.firstName || null, lastName: req.body.lastName || null,
-            password: req.body.password || null}, error: error  });
+    models.sequelize.transaction((t) => {
+        return models.User.create({
+          name: req.body.name,
+          phone: req.body.phone,
+          email: req.body.email,
+          gender: req.body.gender,
+          location: req.body.location,
+          jobRole: req.body.jobRole,
+          password: req.body.password
+        }, {transaction: t}).then( async (profile) => {
+            
+            const sk = req.body.skill.map(skill => {
+              const skills = Object.assign({}, skill);
+              skills.UserId = profile.dataValues.id
+              return skills;
+            })
+            const te = req.body.technologyYouCanTeach.map(tech => {
+              const techs = Object.assign({}, tech);
+              techs.UserId = profile.dataValues.id
+              return techs;
+            })
+            const skill = await models.Skill.bulkCreate(sk, {transaction: t});
+            const tech = await models.TechnologyYouCanTeach.bulkCreate(te, {transaction: t});
+            profile.skill = skill
+            profile.technologyYouCanTeach = tech
+            return profile
         });
+    })
+    .then(user =>{
+        //fire a out a mail
+        user.password = ""
+        return res.status(201).json({ success: true, message: 'Account created',
+                    code: 201, data: user, error: {} });
+    })
+    .catch(error => {
+        console.log(error)
+        return res.status(520).json({ success: false, message: 'unknown error',
+        code: 520, data: {}, error: error  });
+    })
 
 }
 

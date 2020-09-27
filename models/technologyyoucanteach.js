@@ -14,12 +14,16 @@ module.exports = (sequelize, DataTypes) => {
       models.TechnologyYouCanTeach.belongsTo(models.User, {
         onDelete: "CASCADE",
         foreignKey: {
-          allowNull: false}
+          allowNull: true}
         })
+        models.TechnologyYouCanTeach.belongsTo(models.TechStack, {
+          onDelete: "CASCADE",
+          foreignKey: {
+            allowNull: true}
+          })
     }
   };
   TechnologyYouCanTeach.init({
-    name: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'TechnologyYouCanTeach',

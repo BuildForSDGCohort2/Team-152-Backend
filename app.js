@@ -15,17 +15,15 @@ const app = express();
 
 app.disable('x-powered-by');
 app.use(cors())
-// 6: Hook up Passport.
-app.use(passport.initialize());
-// Hook the passport JWT strategy.
-hookJWTStrategy(passport);
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
+// 6: Hook up Passport.
+app.use(passport.initialize());
+// Hook the passport JWT strategy.
+hookJWTStrategy(passport);
 
 app.use('/api/users', protect)
 app.use('/api', require('./routes/api')(passport));

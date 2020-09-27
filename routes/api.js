@@ -20,9 +20,11 @@ const APIRoutes = function(passport) {
     body('phone').notEmpty().custom(value => {
       return sanitizePhoneNumber(value)
     }),
-    check('firstName').notEmpty().isLength({ min: 3 }),
-    check('lastName').notEmpty().isLength({ min: 3 }),
-    check('password').notEmpty().isLength({ min : 8 }),
+    check('name').notEmpty().isLength({ min: 3 }),
+    check('gender').notEmpty().isLength({ min: 3 }).isString(),
+    check('jobRole').notEmpty().isLength({ min: 3 }).isString(),
+    check('location').notEmpty().isLength({ min: 3 }).isString(),
+    check('password').notEmpty().isLength({ min : 8 }).isAlphanumeric(),
     body('passwordConfirmation').custom((value, { req }) => {
       if (value !== req.body.password) {
         throw new Error('Password confirmation does not match password');
