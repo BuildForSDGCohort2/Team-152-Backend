@@ -162,17 +162,31 @@ and returns:
 	"password": "syndicate"
 }
 ```
- Returns a 4 digit token over SMS and the provide phone number as response payload.
+ Returns a json user data payload
 
 Example response payload: successful attempt to login
 
 ```
 {
   "success": true,
-  "status": 200,
-  "message": "token sent to: +2348077471000",
-  "properties": {
-    "phone": "2348077471000"
+  "message": "success",
+  "code": 200,
+  "error": {},
+  "data": {
+    "id": 2,
+    "name": "Ekenekiso Leonard",
+    "phone": "08066607729",
+    "email": "ugbanawaji.ekenekiso@ust.edu.ng",
+    "gender": "male",
+    "location": "Port Harcourt",
+    "jobRole": "Full Stack Developer",
+    "skill": null,
+    "technologyYouCanTeach": null,
+    "password": "",
+    "createdAt": "2020-09-27T16:12:46.000Z",
+    "updatedAt": "2020-09-27T16:12:46.000Z",
+    "deletedAt": null,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVnYmFuYXdhamkuZWtlbmVraXNvQHVzdC5lZHUubmciLCJwaG9uZSI6IjA4MDY2NjA3NzI5IiwiaWQiOjIsImlhdCI6MTYwMTQ3MTM2MiwiZXhwIjoxNzU2OTkxMzYyfQ.rQiKxszeuTAB4BKWSn65YyxcPGfxw_LD_4EgEPUn3uc"
   }
 }
 ```
