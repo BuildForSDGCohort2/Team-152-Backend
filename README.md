@@ -154,3 +154,25 @@ and returns:
  A json response payload. the error property will be populated if there's an error during execution of the create process.
 
 #### **POST** `/api/login`
+#### **POST** `/api/login`
+* Used for signing in a user. Accepts: 
+```
+{
+	"email": "ugbanawaji.ekenekiso@ust.edu.ng",
+	"password": "syndicate"
+}
+```
+ Returns a 4 digit token over SMS and the provide phone number as response payload.
+
+Example response payload: successful attempt to login
+
+```
+{
+  "success": true,
+  "status": 200,
+  "message": "token sent to: +2348077471000",
+  "properties": {
+    "phone": "2348077471000"
+  }
+}
+```

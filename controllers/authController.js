@@ -85,6 +85,8 @@ AuthController.authenticate = (req, res) => {
                 );
                 res.setHeader('Authorization', `Bearer ${token}`)
                 //user.dataValues.password = null
+                user.dataValues.password = ""
+                user.dataValues.token = token
                 return res.status(200).json({ success: true, message: 'success',
                         code: 200, error: {}, data:  user });
 
