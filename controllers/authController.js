@@ -70,7 +70,7 @@ AuthController.authenticate = (req, res) => {
 
     }
     models.User.findOne({where: {email: req.body.email}}).then((user)=>{
-        console.log(req.body.password, user.dataValues.password)
+        console.log(user)
         user._modelOptions.instanceMethods.comparePasswords(req.body.password, user.dataValues.password, (error, isMatch) =>{
             if(isMatch && !error) {
                 const token = jwt.sign(
@@ -86,20 +86,18 @@ AuthController.authenticate = (req, res) => {
                 res.setHeader('Authorization', `Bearer ${token}`)
                 //user.dataValues.password = null
                 return res.status(200).json({ success: true, message: 'success',
-                        code: 200, properties:{ email: req.body.email || null,
-                        password: req.body.password || null, token: token}, data:  user });
+                        code: 200, error: {}, data:  user });
 
             } else {
                 return res.status(401).json({ success: false, message: 'unauthorized',
-                        code: 401, properties:{ email: req.body.email || null,
-                        password: req.body.password || null}, error: error  });
+                        code: 401, data: {}, error: error  });
             }
         })
 
     }).catch((error)=>{
+        console.log(error)
         return res.status(520).json({ success: true, message: 'unknown error',
-                    code: 520, properties:{ email: req.body.email || null,
-                    password: req.body.password || null}, error: error  });
+                    code: 520, data: {}, error: error  });
     })
 }
 

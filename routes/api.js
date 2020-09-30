@@ -34,7 +34,7 @@ const APIRoutes = function(passport) {
     })], AuthController.signUp);
 
     //authenticate user
-    router.post('/authenticate', [check('email').notEmpty().isEmail(), body('email').custom((value)=> {
+    router.post('/authenticate', [check('password').notEmpty(),check('email').notEmpty().isEmail(), body('email').custom((value)=> {
       return models.User.findOne({where :{ email: value }}).then(user => {
       if (!user) {
         return Promise.reject('E-mail does not exist');
